@@ -164,7 +164,7 @@ st.write(" \n**A continuacion, se muestran los casos de contagio de acuerdo al s
 
 
 import pandas as pd
-import matplotlib.pyplot as plt
+import altair as alt
 
 # Filtrar los datos por departamento, provincia y distrito
 datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
@@ -176,15 +176,22 @@ registros_por_sexo = datos_filtrados['SEXO'].value_counts().reset_index()
 registros_por_sexo.columns = ['Sexo', 'Número de registros']
 
 # Crear el gráfico de barras
-fig, ax = plt.subplots(figsize=(8, 6))
-ax.bar(registros_por_sexo['Sexo'], registros_por_sexo['Número de registros'],
-       color=['#FF5733', '#C70039'])  # Colores personalizados
+bar_chart = alt.Chart(registros_por_sexo).mark_bar().encode(
+    x='Sexo',
+    y='Número de registros'
+)
 
-ax.set_title('Número de Registros por Sexo')
-ax.set_xlabel('Sexo')
-ax.set_ylabel('Número de registros')
+# Configurar las etiquetas y el título
+chart_title = alt.TitleParams(text='Número de Registros por Sexo', align='center')
 
-plt.show()
+# Mostrar el gráfico utilizando Streamlit
+st.altair_chart(bar_chart, use_container_width=True)
+
+
+
+
+
+
 
 
 
