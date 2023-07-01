@@ -268,6 +268,3 @@ st.markdown('<div class="tabla-leyenda"> </div>', unsafe_allow_html=True)
 st.table(leyenda_data)
 
 
-
-print(df.head())  # Imprime las primeras filas del DataFrame para verificar su contenido
-
