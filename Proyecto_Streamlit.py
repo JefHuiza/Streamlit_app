@@ -266,10 +266,3 @@ st.markdown('<div class="tabla-leyenda"> </div>', unsafe_allow_html=True)
 st.table(leyenda_data)
 
 
-# Cargar el archivo CSV con delimitador ","
-df = pd.read_csv('positivos_covid.csv', delimiter=',')
-
-# Imprimir los nombres de las columnas
-columnas = df.columns.tolist()
-print(columnas)
-
