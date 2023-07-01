@@ -1,14 +1,8 @@
 
 import streamlit as st
-import streamlit as st
-import matplotlib.pyplot as plt
-import streamlit as st
 import pandas as pd
-import numpy as np
 import plotly.express as px
-from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
 
 # Estilo personalizado para el título
 titulo_style = """
@@ -26,6 +20,7 @@ titulo_style = """
 st.markdown(titulo_style, unsafe_allow_html=True)
 st.markdown('<p class="titulo">Casos Positivos del Covid-2019</p>', unsafe_allow_html=True)
 
+# Resto del código utilizando plotly en lugar de matplotlib
 
 
 import streamlit as st
