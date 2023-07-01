@@ -17,7 +17,22 @@ titulo_style = """
 st.markdown(titulo_style, unsafe_allow_html=True)
 st.markdown('<p class="titulo">Casos Positivos del Covid-2019</p>', unsafe_allow_html=True)
 
-# Resto del código utilizando plotly en lugar de matplotlib
+
+
+import streamlit as st
+from PIL import Image
+
+
+# Ruta de la imagen del logo
+ruta_logo = "nombre_del_logo.png"  # Reemplaza "nombre_del_logo.png" con el nombre de tu archivo de imagen
+
+# Establecer el tamaño de la columna
+st.sidebar.image(ruta_logo, use_column_width=True)
+
+
+# Cargar y mostrar la segunda imagen debajo del logo
+image = Image.open('i.png')
+st.sidebar.image(image, use_column_width=True)
 
 
 
