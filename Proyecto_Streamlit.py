@@ -101,6 +101,9 @@ st.markdown(texto_centrado + texto_formal, unsafe_allow_html=True)
 
 
 
+
+
+
 import pandas as pd
 import streamlit as st
 
@@ -151,6 +154,7 @@ import streamlit as st
 st.write(" \n**A continuacion, se muestran los casos de contagio de acuerdo al sexo de las personas mediante un grafico:**\n")
 
 
+print(df.head())
 
 
 
