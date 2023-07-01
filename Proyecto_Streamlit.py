@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 
 
+
 # Estilo personalizado para el título
 titulo_style = """
 <style>
@@ -117,7 +118,7 @@ import streamlit as st
 import pandas as pd
 
 # Cargar el archivo CSV
-df = pd.read_csv('positivos_covid.csv', delimiter=';')
+df = pd.read_csv('positivos_covid.csv', delimiter='\t', encoding='utf-8')
 
 # Crear selectores desplegables para departamento, provincia y distrito
 departamentos = df['DEPARTAMENTO'].unique()
