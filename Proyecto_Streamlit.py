@@ -2,6 +2,20 @@
 import streamlit as st
 import pandas as pd
 
+import pandas as pd
+
+# Ruta del archivo positivos_covid.csv
+ruta_positivos_covid = 'C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/positivos_covid.csv'
+
+# Ruta del archivo sexo.csv
+ruta_sexo = 'C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/sexo.csv'
+
+# Leer los archivos CSV
+df_positivos_covid = pd.read_csv(ruta_positivos_covid)
+df_sexo = pd.read_csv(ruta_sexo)
+
+# Resto del código para procesar y visualizar los datos
+# ...
 
 
 # Estilo personalizado para el título
@@ -117,8 +131,6 @@ st.write("\n**Escoge un departamento, una provincia y un distrito para filtrar l
 import streamlit as st
 import pandas as pd
 
-# Cargar el archivo CSV
-df = pd.read_csv('positivos_covid.csv', delimiter='\t', encoding='utf-8')
 
 # Crear selectores desplegables para departamento, provincia y distrito
 departamentos = df['DEPARTAMENTO'].unique()
