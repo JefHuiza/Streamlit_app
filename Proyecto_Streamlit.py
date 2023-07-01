@@ -119,6 +119,12 @@ import streamlit as st
 import pandas as pd
 
 
+df.columns = df.columns.str.strip()
+df = pd.read_csv(ruta_positivos_covid, delimiter=';')
+df = pd.read_csv(ruta_positivos_covid, delimiter=';', encoding='utf-8')
+
+
+
 # Crear selectores desplegables para departamento, provincia y distrito
 departamentos = df['DEPARTAMENTO'].unique()
 departamento_seleccionado = st.selectbox('Selecciona un departamento:', departamentos)
