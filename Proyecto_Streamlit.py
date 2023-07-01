@@ -149,20 +149,6 @@ import streamlit as st
 st.write(" \n**A continuacion, se muestran los casos de contagio de acuerdo al sexo de las personas mediante un grafico:**\n")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import pandas as pd
 import altair as alt
 
@@ -187,29 +173,12 @@ chart_title = alt.TitleParams(text='Número de Registros por Sexo', align='cente
 # Mostrar el gráfico utilizando Streamlit
 st.altair_chart(bar_chart, use_container_width=True)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 st.write(" \n**En este apartado, se muestran los casos de contagio de acuerdo a la edad de las personas en una tabla de distribucion:**\n")
 
+
 import pandas as pd
-from bokeh.plotting import figure
-from bokeh.io import show
-from bokeh.models import ColumnDataSource
+import altair as alt
+import streamlit as st
 
 # Filtrar los datos por departamento, provincia y distrito
 datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
@@ -220,28 +189,19 @@ datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
 registros_por_edad = datos_filtrados['EDAD'].value_counts().reset_index()
 registros_por_edad.columns = ['Edad', 'Número de registros']
 
-# Crear el gráfico de barras
-p = figure(x_range=list(map(str, registros_por_edad['Edad'])), plot_height=400, plot_width=600,
-           title='Número de Registros por Edad', toolbar_location=None, tools='')
+# Crear el gráfico de barras utilizando Altair
+bar_chart = alt.Chart(registros_por_edad).mark_bar().encode(
+    x='Edad:O',
+    y='Número de registros:Q'
+)
 
-p.vbar(x='Edad', top='Número de registros', width=0.9, source=ColumnDataSource(registros_por_edad))
+# Configurar el título
+chart_title = alt.TitleParams(text='Número de Registros por Edad', align='center')
 
-p.xgrid.grid_line_color = None
-p.y_range.start = 0
-
-# Mostrar el gráfico utilizando Bokeh
-show(p)
-
+# Mostrar el gráfico utilizando Streamlit
+st.altair_chart(bar_chart, use_container_width=True)
 
 st.write(" \n**Con respecto al tipo de pruebas que se realizaron, se tienen las siguientes estadisticas:**\n")
-
-
-import pandas as pd
-import seaborn as sns
-import streamlit as st
-
-# Cargar los datos del archivo CSV
-df = pd.read_csv('positivos_covid.csv', delimiter=';')
 
 # Filtrar los datos por departamento, provincia y distrito
 datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
@@ -252,21 +212,17 @@ datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
 registros_por_metodo = datos_filtrados['METODODX'].value_counts().reset_index()
 registros_por_metodo.columns = ['Método de Diagnóstico', 'Número de Registros']
 
-# Crear el gráfico de barras utilizando seaborn
-sns.barplot(x='Método de Diagnóstico', y='Número de Registros', data=registros_por_metodo)
+# Crear el gráfico de barras utilizando Altair
+bar_chart_metodo = alt.Chart(registros_por_metodo).mark_bar().encode(
+    x='Método de Diagnóstico',
+    y='Número de Registros'
+)
 
-# Configurar el título y etiquetas de los ejes
-plt.title('Número de Registros por Método de Diagnóstico')
-plt.xlabel('Método de Diagnóstico')
-plt.ylabel('Número de Registros')
+# Configurar el título
+chart_title_metodo = alt.TitleParams(text='Número de Registros por Método de Diagnóstico', align='center')
 
-# Mostrar el gráfico
-st.pyplot()
-
-
-import streamlit as st
-import pandas as pd
-import streamlit.components.v1 as components
+# Mostrar el gráfico utilizando Streamlit
+st.altair_chart(bar_chart_metodo, use_container_width=True)
 
 # Crear el DataFrame con los datos de la leyenda
 leyenda_data = pd.DataFrame({
@@ -294,8 +250,9 @@ estilo = """
 """
 
 # Mostrar la tabla con estilo personalizado
-components.html(estilo, height=0)
+st.markdown(estilo, unsafe_allow_html=True)
 st.markdown('<div class="tabla-leyenda"> </div>', unsafe_allow_html=True)
 st.table(leyenda_data)
+
 
 
