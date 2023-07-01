@@ -1,3 +1,5 @@
+[positivos_covid.csv](https://www.dropbox.com/s/1td6p37gmh96kop/positivos_covid.csv?dl=0)
+[sexo.csv](https://www.dropbox.com/s/vod4wcrkwqwqp4v/sexo.csv?dl=0)
 
 
 
