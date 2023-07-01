@@ -4,19 +4,6 @@ import pandas as pd
 
 import pandas as pd
 
-# Ruta del archivo positivos_covid.csv
-ruta_positivos_covid = 'C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/positivos_covid.csv'
-
-# Ruta del archivo sexo.csv
-ruta_sexo = 'C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/sexo.csv'
-
-# Leer los archivos CSV
-df_positivos_covid = pd.read_csv("C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/positivos_covid.csv")
-df_sexo = pd.read_csv("C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/positivos_covid.csv")
-
-# Resto del código para procesar y visualizar los datos
-# ...
-
 
 # Estilo personalizado para el título
 titulo_style = """
