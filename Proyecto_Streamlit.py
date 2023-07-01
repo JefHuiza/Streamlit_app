@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -21,6 +20,8 @@ st.markdown(titulo_style, unsafe_allow_html=True)
 st.markdown('<p class="titulo">Casos Positivos del Covid-2019</p>', unsafe_allow_html=True)
 
 # Resto del código utilizando plotly en lugar de matplotlib
+
+
 
 
 import streamlit as st
@@ -144,8 +145,9 @@ st.write(" \n**A continuacion, se muestran los casos de contagio de acuerdo al s
 
 
 import pandas as pd
-import plotly.express as px
-import streamlit as st
+from bokeh.plotting import figure
+from bokeh.io import show
+from bokeh.models import ColumnDataSource
 
 # Filtrar los datos por departamento, provincia y distrito
 datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
@@ -157,20 +159,27 @@ registros_por_sexo = datos_filtrados['SEXO'].value_counts().reset_index()
 registros_por_sexo.columns = ['Sexo', 'Número de registros']
 
 # Crear el gráfico de barras con colores personalizados
-fig = px.bar(registros_por_sexo, x='Sexo', y='Número de registros',
-             labels={'Sexo': 'Sexo', 'Número de registros': 'Número de registros'},
-             color_discrete_sequence=['#FF5733', '#C70039'])  # Colores personalizados
+p = figure(x_range=registros_por_sexo['Sexo'], plot_height=400, plot_width=600,
+           title='Número de Registros por Sexo', toolbar_location=None, tools='')
 
-# Mostrar el gráfico
-st.plotly_chart(fig)
+p.vbar(x='Sexo', top='Número de registros', width=0.9, source=ColumnDataSource(registros_por_sexo),
+       line_color='black', fill_color=['#FF5733', '#C70039'])  # Colores personalizados
+
+p.xgrid.grid_line_color = None
+p.y_range.start = 0
+
+# Mostrar el gráfico utilizando Bokeh
+show(p)
+
 
 
 
 st.write(" \n**En este apartado, se muestran los casos de contagio de acuerdo a la edad de las personas en una tabla de distribucion:**\n")
 
 import pandas as pd
-import plotly.express as px
-import streamlit as st
+from bokeh.plotting import figure
+from bokeh.io import show
+from bokeh.models import ColumnDataSource
 
 # Filtrar los datos por departamento, provincia y distrito
 datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
@@ -182,18 +191,24 @@ registros_por_edad = datos_filtrados['EDAD'].value_counts().reset_index()
 registros_por_edad.columns = ['Edad', 'Número de registros']
 
 # Crear el gráfico de barras
-fig = px.bar(registros_por_edad, x='Edad', y='Número de registros', labels={'Edad': 'Edad', 'Número de registros': 'Número de registros'})
+p = figure(x_range=list(map(str, registros_por_edad['Edad'])), plot_height=400, plot_width=600,
+           title='Número de Registros por Edad', toolbar_location=None, tools='')
 
-# Mostrar el gráfico
-st.plotly_chart(fig)
+p.vbar(x='Edad', top='Número de registros', width=0.9, source=ColumnDataSource(registros_por_edad))
+
+p.xgrid.grid_line_color = None
+p.y_range.start = 0
+
+# Mostrar el gráfico utilizando Bokeh
+show(p)
+
 
 st.write(" \n**Con respecto al tipo de pruebas que se realizaron, se tienen las siguientes estadisticas:**\n")
 
 
-
 import pandas as pd
+import seaborn as sns
 import streamlit as st
-import plotly.graph_objects as go
 
 # Cargar los datos del archivo CSV
 df = pd.read_csv('positivos_covid.csv', delimiter=';')
@@ -207,18 +222,16 @@ datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
 registros_por_metodo = datos_filtrados['METODODX'].value_counts().reset_index()
 registros_por_metodo.columns = ['Método de Diagnóstico', 'Número de Registros']
 
-# Crear el gráfico de barras utilizando Plotly
-fig = go.Figure(data=[go.Bar(x=registros_por_metodo['Método de Diagnóstico'],
-                            y=registros_por_metodo['Número de Registros'],
-                            marker=dict(color='goldenrod'))])
+# Crear el gráfico de barras utilizando seaborn
+sns.barplot(x='Método de Diagnóstico', y='Número de Registros', data=registros_por_metodo)
 
-# Establecer el diseño del gráfico
-fig.update_layout(title='Número de Registros por Método de Diagnóstico',
-                  xaxis_title='Método de Diagnóstico',
-                  yaxis_title='Número de Registros')
+# Configurar el título y etiquetas de los ejes
+plt.title('Número de Registros por Método de Diagnóstico')
+plt.xlabel('Método de Diagnóstico')
+plt.ylabel('Número de Registros')
 
-# Mostrar el gráfico utilizando st.plotly_chart
-st.plotly_chart(fig)
+# Mostrar el gráfico
+st.pyplot()
 
 
 import streamlit as st
