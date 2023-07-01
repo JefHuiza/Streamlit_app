@@ -2,8 +2,6 @@
 import streamlit as st
 import pandas as pd
 
-df = pd.read_csv('positivos_covid.csv', delimiter=';', encoding='utf-8')
-
 
 # Estilo personalizado para el título
 titulo_style = """
