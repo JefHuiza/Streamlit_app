@@ -165,10 +165,15 @@ st.write(" \n**A continuacion, se muestran los casos de contagio de acuerdo al s
 
 
 
+
+
+
+
+
 import pandas as pd
-from bokeh.plotting import figure
-from bokeh.io import show
+from bokeh.plotting import figure, show
 from bokeh.models import ColumnDataSource
+from bokeh.palettes import Spectral6
 
 # Filtrar los datos por departamento, provincia y distrito
 datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
@@ -184,13 +189,21 @@ p = figure(x_range=registros_por_sexo['Sexo'], plot_height=400, plot_width=600,
            title='Número de Registros por Sexo', toolbar_location=None, tools='')
 
 p.vbar(x='Sexo', top='Número de registros', width=0.9, source=ColumnDataSource(registros_por_sexo),
-       line_color='black', fill_color=['#FF5733', '#C70039'])  # Colores personalizados
+       line_color='black', fill_color=Spectral6[:2])  # Colores personalizados
 
-p.xgrid.grid_line_color = None
+p.xgrid.visible = False
 p.y_range.start = 0
 
 # Mostrar el gráfico utilizando Bokeh
 show(p)
+
+
+
+
+
+
+
+
 
 
 
