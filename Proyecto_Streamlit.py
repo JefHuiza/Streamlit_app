@@ -113,6 +113,11 @@ import streamlit as st
 
 st.write("\n**Escoge un departamento, una provincia y un distrito para filtrar los datos que se tienen. Sea paciente**.\n")
 
+import streamlit as st
+import pandas as pd
+
+# Cargar el archivo CSV
+df = pd.read_csv('positivos_covid.csv', delimiter=';')
 
 # Crear selectores desplegables para departamento, provincia y distrito
 departamentos = df['DEPARTAMENTO'].unique()
@@ -124,10 +129,6 @@ provincia_seleccionada = st.selectbox('Selecciona una provincia:', provincias)
 distritos = df[(df['DEPARTAMENTO'] == departamento_seleccionado) & (df['PROVINCIA'] == provincia_seleccionada)]['DISTRITO'].unique()
 distrito_seleccionado = st.selectbox('Selecciona un distrito:', distritos)
 
-# Filtrar los datos en base a las selecciones
-filtered_data = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
-                   (df['PROVINCIA'] == provincia_seleccionada) &
-                   (df['DISTRITO'] == distrito_seleccionado)]
 
 # Mostrar el número de personas registradas en las condiciones seleccionadas
 num_personas = len(filtered_data)
