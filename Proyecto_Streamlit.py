@@ -1,6 +1,12 @@
 
 import streamlit as st
 import pandas as pd
+# Cargar el archivo CSV
+df = pd.read_csv('positivos_covid.csv', delimiter=';')
+
+# Imprimir los nombres de las columnas
+columnas = df.columns.tolist()
+print(columnas)
 
 # Estilo personalizado para el título
 titulo_style = """
