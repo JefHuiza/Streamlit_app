@@ -1,6 +1,40 @@
 import streamlit as st
 import pandas as pd
 
+# Cargar archivo "sexo.csv"
+archivo_sexo = st.file_uploader("Selecciona el archivo sexo.csv", type=["csv"])
+if archivo_sexo is not None:
+    df_sexo = pd.read_csv(archivo_sexo)
+    st.write(df_sexo)
+else:
+    st.write("No se ha seleccionado el archivo sexo.csv.")
+
+# Cargar archivo "positivos_covid.csv"
+archivo_positivos = st.file_uploader("Selecciona el archivo positivos_covid.csv", type=["csv"])
+if archivo_positivos is not None:
+    df_positivos = pd.read_csv(archivo_positivos, delimiter=';')
+    st.write(df_positivos)
+else:
+    st.write("No se ha seleccionado el archivo positivos_covid.csv.")
+
+# Cargar imagen "nombre_del_logo.png"
+archivo_logo = st.file_uploader("Selecciona la imagen nombre_del_logo.png", type=["png"])
+if archivo_logo is not None:
+    st.image(archivo_logo, use_column_width=True)
+else:
+    st.write("No se ha seleccionado la imagen nombre_del_logo.png.")
+
+# Cargar imagen "i.png"
+archivo_imagen = st.file_uploader("Selecciona la imagen i.png", type=["png"])
+if archivo_imagen is not None:
+    st.image(archivo_imagen, use_column_width=True)
+else:
+    st.write("No se ha seleccionado la imagen i.png.")
+
+
+import streamlit as st
+import pandas as pd
+
 # Estilo personalizado para el título
 titulo_style = """
 <style>
