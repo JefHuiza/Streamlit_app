@@ -99,11 +99,6 @@ texto_centrado = """
 st.markdown(texto_centrado + texto_formal, unsafe_allow_html=True)
 
 
-
-
-
-
-
 import pandas as pd
 import streamlit as st
 
@@ -168,12 +163,8 @@ st.write(" \n**A continuacion, se muestran los casos de contagio de acuerdo al s
 
 
 
-
-
 import pandas as pd
-from bokeh.plotting import figure, show
-from bokeh.models import ColumnDataSource
-from bokeh.palettes import Spectral6
+import matplotlib.pyplot as plt
 
 # Filtrar los datos por departamento, provincia y distrito
 datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
@@ -184,18 +175,16 @@ datos_filtrados = df[(df['DEPARTAMENTO'] == departamento_seleccionado) &
 registros_por_sexo = datos_filtrados['SEXO'].value_counts().reset_index()
 registros_por_sexo.columns = ['Sexo', 'Número de registros']
 
-# Crear el gráfico de barras con colores personalizados
-p = figure(x_range=registros_por_sexo['Sexo'], plot_height=400, plot_width=600,
-           title='Número de Registros por Sexo', toolbar_location=None, tools='')
+# Crear el gráfico de barras
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.bar(registros_por_sexo['Sexo'], registros_por_sexo['Número de registros'],
+       color=['#FF5733', '#C70039'])  # Colores personalizados
 
-p.vbar(x='Sexo', top='Número de registros', width=0.9, source=ColumnDataSource(registros_por_sexo),
-       line_color='black', fill_color=Spectral6[:2])  # Colores personalizados
+ax.set_title('Número de Registros por Sexo')
+ax.set_xlabel('Sexo')
+ax.set_ylabel('Número de registros')
 
-p.xgrid.visible = False
-p.y_range.start = 0
-
-# Mostrar el gráfico utilizando Bokeh
-show(p)
+plt.show()
 
 
 
