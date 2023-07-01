@@ -11,8 +11,8 @@ ruta_positivos_covid = 'C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/positivo
 ruta_sexo = 'C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/sexo.csv'
 
 # Leer los archivos CSV
-df_positivos_covid = pd.read_csv(ruta_positivos_covid)
-df_sexo = pd.read_csv(ruta_sexo)
+df_positivos_covid = pd.read_csv("C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/positivos_covid.csv")
+df_sexo = pd.read_csv("C:/Users/Lenovo/Music/UPCH-PROGRA/Streamlit_app/positivos_covid.csv")
 
 # Resto del código para procesar y visualizar los datos
 # ...
